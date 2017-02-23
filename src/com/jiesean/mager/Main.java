@@ -1,4 +1,4 @@
-package com.vladsch;
+package com.jiesean.mager;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IParse;
@@ -310,9 +310,13 @@ public class Main {
                 "with lazy continuation\n" +
                 "\n" +
                 "---\n" +
-                "\n");
+                "**niho** \n"+"# hello \n"+
+                ">nihao \n"+
+                 "## nihaomsmadmsod\n"   );
 
         String html = render.render(document);
         System.out.println(html);
+
+        new MainUI();
     }
 }
