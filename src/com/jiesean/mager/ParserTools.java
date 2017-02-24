@@ -31,12 +31,19 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import java.util.ArrayList;
 
-public class Main {
+public class ParserTools {
+
+    private IParse parser;
+    private IRender render;
     public enum ForUseBy {
         PARSER,
         JAVAFX,
         SWING,
         HTML
+    }
+
+    public ParserTools(){
+        initParser();
     }
 
     static class Options {
@@ -296,27 +303,42 @@ public class Main {
         return dataSet;
     }
 
-    public static void main(String[] args) {
-        // write your code here
+//    public static void main(String[] args) {
+//        // write your code here
+//        Options options = new Options();
+//        DataHolder dataHolder = options(ForUseBy.HTML, options);
+//        IParse parser = Parser.builder(dataHolder).build();
+//        IRender render = HtmlRenderer.builder(dataHolder).build();
+//
+//        Node document = parser.parse("\n" +
+//                "# Heading\n" +
+//                "\n" +
+//                "Paragraph Text\n" +
+//                "with lazy continuation\n" +
+//                "\n" +
+//                "---\n" +
+//                "**niho** \n"+"# hello \n"+
+//                ">nihao \n"+
+//                 "## nihaomsmadmsod\n"   );
+//
+//        String html = render.render(document);
+////        System.out.println(html);
+//
+//        new MainUI();
+//    }
+
+    public void initParser(){
         Options options = new Options();
         DataHolder dataHolder = options(ForUseBy.HTML, options);
-        IParse parser = Parser.builder(dataHolder).build();
-        IRender render = HtmlRenderer.builder(dataHolder).build();
+        parser = Parser.builder(dataHolder).build();
+        render = HtmlRenderer.builder(dataHolder).build();
+    }
 
-        Node document = parser.parse("\n" +
-                "# Heading\n" +
-                "\n" +
-                "Paragraph Text\n" +
-                "with lazy continuation\n" +
-                "\n" +
-                "---\n" +
-                "**niho** \n"+"# hello \n"+
-                ">nihao \n"+
-                 "## nihaomsmadmsod\n"   );
+    public String convertToHtml(String content){
 
+        Node document = parser.parse(content );
         String html = render.render(document);
-        System.out.println(html);
-
-        new MainUI();
+//        System.out.println(html);
+        return html;
     }
 }
